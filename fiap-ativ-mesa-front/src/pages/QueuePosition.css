@@ -1,0 +1,120 @@
+/* src/pages/QueuePosition.css */
+
+.status-page-background, .celebration-background {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.status-page-background {
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 100%);
+}
+
+.status-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.card-subtitle {
+  color: #556677;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.card-restaurant-title {
+  color: #2c3e50;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.position-display {
+  margin: 20px 0;
+  height: 100px; /* Garante altura fixa para o número não "pular" */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.position-number {
+  font-size: 6rem;
+  font-weight: 700;
+  color: #007bff;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+}
+
+.details-grid div {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-grid span {
+  font-size: 0.8rem;
+  color: #556677;
+}
+
+.details-grid strong {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Estilos para a fila visual */
+.visual-queue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 15px;
+  color: #7f8c8d;
+}
+
+.queue-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.queue-person.is-you {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.queue-person.is-you span {
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* Estilos para a tela de celebração */
+.celebration-background {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.celebration-content {
+  color: white;
+}
+
+.celebration-content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.celebration-content p {
+  font-size: 1.5rem;
+}

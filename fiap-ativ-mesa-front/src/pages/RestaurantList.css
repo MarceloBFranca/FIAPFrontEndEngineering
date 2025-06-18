@@ -1,0 +1,55 @@
+/* src/pages/RestaurantList.css */
+
+/* Aplica a nova fonte e um fundo com gradiente suave */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 100%);
+  min-height: 100vh;
+}
+
+/* Estilo para o cabeçalho da página */
+.page-header {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.page-header h1 {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: #556677;
+  max-width: 500px;
+  margin: 8px auto 0;
+}
+
+/* Estilo para o card do restaurante */
+.restaurant-card {
+  border: none; /* Remove a borda padrão */
+  border-radius: 12px; /* Cantos mais arredondados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07); /* Sombra suave para dar profundidade */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Animação de hover */
+}
+
+/* Efeito ao passar o mouse */
+.restaurant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove o sublinhado do link que envolve o card */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Ajustes finos no corpo do card */
+.card-body {
+  padding: 1.5rem; /* Mais espaço interno */
+}
+
+.card-title {
+  font-weight: 600;
+}

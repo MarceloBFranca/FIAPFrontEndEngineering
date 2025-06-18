@@ -1,0 +1,53 @@
+/* src/pages/RestaurantDetail.css */
+
+.detail-page-background {
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 100%);
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.restaurant-image {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-title {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.restaurant-address {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 1.5rem;
+}
+
+.restaurant-description {
+  font-size: 1.1rem;
+  color: #556677;
+  line-height: 1.6;
+}
+
+.queue-info-box {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-item span {
+  font-size: 0.9rem;
+  color: #556677;
+}
+
+.info-item strong {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #007bff;
+}
