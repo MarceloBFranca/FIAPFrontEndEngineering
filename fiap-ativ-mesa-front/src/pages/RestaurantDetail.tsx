@@ -1,5 +1,4 @@
-// src/pages/RestaurantDetail.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueue } from '../context/QueueContext';
 import { Container, Row, Col, Image, Button, Spinner, Alert, Card } from 'react-bootstrap';
@@ -9,9 +8,8 @@ import './RestaurantDetail.css';
 export const RestaurantDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { restaurants, queues, userQueues, loading } = useQueue(); 
+  const { restaurants, queues, loading } = useQueue(); 
   
-  // Estados para controlar o carregamento do botão e mensagens de erro
   const [isJoining, setIsJoining] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,15 +25,13 @@ export const RestaurantDetail = () => {
     return <Container className="text-center mt-5"><h1>Restaurante não encontrado.</h1></Container>;
   }
 
-  // Calcula o tempo de espera estimado
   const estimatedWaitTime = occupation * restaurant.estimatedWaitTimePerPerson;
 
   const handleJoinQueue = async () => {
     setIsJoining(true);
     setError(null);
 
-    // fixo meu ID como 500 para emular como se estivesse logado
-    const mockUserId = 500; 
+    const mockUserId = Math.random() * 2000; 
 
     try {
       const response = await fetch('http://localhost:3000/api/joinQueue', {
@@ -47,7 +43,6 @@ export const RestaurantDetail = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        // Exibe o erro vindo do backend
         setError(data.message || 'Ocorreu um erro.');
         return;
       }
@@ -73,18 +68,15 @@ export const RestaurantDetail = () => {
     <div className="detail-page-background">
       <Container className="py-5">
         <Row className="align-items-center">
-          {/* Coluna da Imagem */}
           <Col md={6}>
             <Image src={restaurant.imageUrl} rounded fluid className="restaurant-image" />
           </Col>
 
-          {/* Coluna das Informações */}
           <Col md={6} className="mt-4 mt-md-0">
             <h1 className="restaurant-title">{restaurant.Name}</h1>
             <p className="restaurant-address">{restaurant.address}</p>
             <p className="restaurant-description">{restaurant.description}</p>
             
-            {/* Caixa de Informações da Fila */}
             <Card className="queue-info-box my-4">
               <Card.Body>
                 <Row>
@@ -104,7 +96,6 @@ export const RestaurantDetail = () => {
               </Card.Body>
             </Card>
 
-            {/* Botão de Ação */}
             <div className="d-grid">
               <Button 
                 onClick={handleJoinQueue} 
@@ -119,8 +110,6 @@ export const RestaurantDetail = () => {
                 ) : 'Entrar na Fila'}
               </Button>
             </div>
-
-            {/* Alerta de Erro */}
             {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
           </Col>
         </Row>

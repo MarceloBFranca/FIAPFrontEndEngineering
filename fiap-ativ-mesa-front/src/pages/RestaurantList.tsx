@@ -1,17 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQueue } from '../context/QueueContext';
 import { Container, Row, Col, Card, Badge, Spinner } from 'react-bootstrap';
-// Certifique-se de que o CSS está importado se você o estiver usando
-// import './RestaurantList.css'; 
 
 export const RestaurantList = () => {
-  // A desestruturação continua a mesma
   const { restaurants, queues, loading } = useQueue();
 
-  // Guarda nº 1: Verifica o estado de carregamento global do contexto.
-  // Isso cobre a busca inicial de dados.
-  if (loading) {
+  if (loading || !restaurants || !queues) {
     return (
       <Container className="text-center mt-5">
         <Spinner animation="border" role="status">
@@ -22,15 +16,6 @@ export const RestaurantList = () => {
     );
   }
 
-  // GUARDA DE SEGURANÇA Nº 2 (A NOVA LINHA)
-  // Verifica se 'queues' não é undefined, null, ou qualquer outra coisa que não seja um array.
-  // Se não for um array válido, não renderiza nada e aguarda o próximo estado.
-  if (!Array.isArray(queues)) {
-    return null; // ou você pode retornar o Spinner novamente se preferir
-  }
-
-  // A partir deste ponto, temos 100% de certeza que `loading` é false e `queues` é um array.
-  // O código restante agora é seguro.
   return (
     <Container className="py-5"> 
       <div className="page-header text-center">
@@ -40,7 +25,6 @@ export const RestaurantList = () => {
 
       <Row xs={1} md={2} lg={3} className="g-4 mt-4">
         {restaurants.map(restaurant => {
-          // Esta linha agora está protegida e não causará mais o erro.
           const queueInfo = queues.find(q => q.IdRestaurant === restaurant.Id);
           const occupation = queueInfo ? queueInfo.ActualOccupation : 0;
           const hasQueue = occupation > 0;

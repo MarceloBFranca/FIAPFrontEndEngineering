@@ -1,5 +1,4 @@
-// src/context/QueueContext.tsx
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import type { ReactNode} from 'react'
 import type { Queue, Restaurant, UserQueueInfo } from '../types'; 
 import { socket } from '../services/socket';
@@ -15,7 +14,7 @@ const defaultContextValue: QueueContextData = {
   restaurants: [],
   queues: [],
   userQueues: [],
-  loading: true, // Importante: o estado inicial deve ser 'carregando'
+  loading: true, 
 };
 
 const QueueContext = createContext<QueueContextData>(defaultContextValue);
@@ -27,13 +26,30 @@ export const QueueProvider = ({ children }: { children: ReactNode }) => {
   const [userQueues, setUserQueues] = useState<UserQueueInfo[]>([]);
 
   useEffect(() => {
-    // Busca os dados iniciais da API
+    socket.connect();
+
+    const onQueueUpdate = (data: { queues: Queue[], userQueues: UserQueueInfo[] }) => {
+      console.log(data.queues);
+      setQueues(data.queues);
+      setUserQueues(data.userQueues);
+    };
+
+    socket.on('queue:update', onQueueUpdate);
+
+    return () => {
+      socket.off('queue:update', onQueueUpdate);
+      socket.disconnect();
+    };
+  }, []);
+  
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const [resRestaurants, resQueues, resUserQueues] = await Promise.all([
-          fetch('http://localhost:3000/api/restaurants'), // Ajuste a URL/porta
+          fetch('http://localhost:3000/api/restaurants'),
           fetch('http://localhost:3000/api/queue'),
-          fetch('http://localhost:3000/api/userQueue')       
+          fetch('http://localhost:3000/api/userQueue')
         ]);
         const dataRestaurants = await resRestaurants.json();
         const dataQueues = await resQueues.json();
@@ -51,24 +67,7 @@ export const QueueProvider = ({ children }: { children: ReactNode }) => {
     };
 
     fetchData();
-
-    // Conecta o socket e define os listeners
-    socket.connect();
-
-    const onQueueUpdate = (data: { queues: Queue[], userQueues: UserQueueInfo[] }) => {
-      console.log('Fila atualizada via WebSocket:', data);
-      setQueues(data.queues);
-      setUserQueues(data.userQueues); // <-- ATUALIZA O NOVO ESTADO
-    };
-
-    socket.on('queue:update', onQueueUpdate);
-
-    // Função de limpeza para desconectar o socket quando o componente desmontar
-    return () => {
-      socket.off('queue:update', onQueueUpdate);
-      socket.disconnect();
-    };
-  }, []);
+  }, [loading]);
 
   return (
     <QueueContext.Provider value={{ restaurants, queues, userQueues, loading }}>
@@ -77,7 +76,6 @@ export const QueueProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Hook customizado para facilitar o uso do contexto
 export const useQueue = () => {
   return useContext(QueueContext);
 };

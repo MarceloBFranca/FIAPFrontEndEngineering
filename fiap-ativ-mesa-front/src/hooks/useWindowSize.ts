@@ -1,4 +1,3 @@
-// src/hooks/useWindowSize.ts
 import { useState, useEffect } from 'react';
 
 interface Size {
@@ -21,7 +20,7 @@ export default function useWindowSize(): Size {
     }
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Executa na montagem para pegar o tamanho inicial
+    handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
   }, []); 

@@ -2,10 +2,10 @@ export interface Restaurant {
   Id: number;
   Name: string;
   logoUrl: string;
-  imageUrl: string; // Imagem maior para a página de detalhes
+  imageUrl: string;
   description: string;
   address: string;
-  estimatedWaitTimePerPerson: number; // Em minutos
+  estimatedWaitTimePerPerson: number;
 }
 
 export interface Queue {
@@ -15,7 +15,6 @@ export interface Queue {
   ActualPosition: number;
 }
 
-// Representa os dados que salvaremos localmente para rastrear o usuário
 export interface UserQueueInfo {
   UserId: number;  
   Position: number;

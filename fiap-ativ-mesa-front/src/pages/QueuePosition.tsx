@@ -1,7 +1,7 @@
-import React, { useState, useEffect, type JSX } from 'react';
+import { useState, useEffect, type JSX } from 'react';
 import { useQueue } from '../context/QueueContext';
 import type { UserQueueInfo, Restaurant, Queue } from '../types';
-import { Container, Card, Spinner } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoMdPerson } from 'react-icons/io';
 import Confetti from 'react-confetti';
@@ -11,7 +11,7 @@ import './QueuePosition.css';
 export const QueuePosition = (): JSX.Element => {
   const { restaurants, queues, userQueues, loading } = useQueue();
   const [userInfo, setUserInfo] = useState<UserQueueInfo | null>(null);
-  const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
+  const [restaurant, _] = useState<Restaurant | null>(null);
   const [myCurrentPosition, setMyCurrentPosition] = useState<number | null>(null);
   const [myQueueData, setMyQueueData] = useState<Queue | null>(null);
   const { width, height } = useWindowSize();
@@ -23,22 +23,14 @@ export const QueuePosition = (): JSX.Element => {
     }
   }, []);
 
-  // EFEITO PRINCIPAL COM A LÓGICA 100% CORRIGIDA
   useEffect(() => {
     if (userInfo && userQueues && restaurants.length > 0 && queues) {
-      // CORREÇÃO 1: O backend envia 'UserId' (maiúsculo), então buscamos por ele.
       const myQueueEntry = userQueues.find(u => u.UserId === userInfo.UserId);
-      // const myRestaurant = restaurants.find(r => r.Id === userInfo.restaurantId);
-      
-      // setRestaurant(myRestaurant || null);
-
       if (myQueueEntry) {
         const queueData = queues.find(q => q.Id === myQueueEntry.QueueId);
         setMyQueueData(queueData || null);
 
         if (queueData) {
-          // CORREÇÃO 2: Usamos 'myQueueEntry.Position' (com 'P' maiúsculo), que é o dado real vindo do backend.
-          // A fórmula (Senha do Usuário - Senha Chamada + 1) nos dá a posição na fila (1º, 2º, etc.).
           const currentPosition = myQueueEntry.Position - queueData.ActualPosition + 1;
           setMyCurrentPosition(currentPosition);
         } else {
@@ -48,10 +40,7 @@ export const QueuePosition = (): JSX.Element => {
         setMyCurrentPosition(-1); 
       }
     }
-    // CORREÇÃO 3: A dependência de 'myQueueData' é removida para evitar o bug de estado obsoleto.
   }, [userInfo, userQueues, restaurants, queues]);
-
-  // --- RENDERIZAÇÃO CONDICIONAL ---
 
   if (loading || !userInfo || myCurrentPosition === null) {
     return (
@@ -64,8 +53,6 @@ export const QueuePosition = (): JSX.Element => {
     );
   }
 
-  // A condição `myCurrentPosition <= 1` agora funciona corretamente.
-  // Se for a sua vez, a posição será 1. Se você for o próximo, será 2.
   if (myCurrentPosition <= 1) {
     return (
       <div className="celebration-background">
@@ -89,7 +76,6 @@ export const QueuePosition = (): JSX.Element => {
     );
   }
 
-  // A espera estimada agora é (posição - 1) * tempo, pois se você é o 2º, tem 1 pessoa na sua frente.
   const estimatedWaitTime = restaurant ? (myCurrentPosition - 1) * restaurant.estimatedWaitTimePerPerson : 0;
 
   return (
@@ -120,7 +106,6 @@ export const QueuePosition = (): JSX.Element => {
               <strong>{myQueueData?.ActualPosition || '-'}</strong>
             </div>
             <div>
-              {/* CORREÇÃO 4: Usamos a senha real do usuário (myQueueEntry) em vez do que estava no localStorage */}
               <span>Sua Senha</span>
               <strong>{userQueues.find(u => u.UserId === userInfo.UserId)?.Position || '-'}</strong>
             </div>

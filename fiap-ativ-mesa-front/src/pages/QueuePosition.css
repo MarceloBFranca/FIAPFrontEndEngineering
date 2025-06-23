@@ -1,5 +1,3 @@
-/* src/pages/QueuePosition.css */
-
 .status-page-background, .celebration-background {
   min-height: 100vh;
   display: flex;
@@ -38,7 +36,7 @@
 
 .position-display {
   margin: 20px 0;
-  height: 100px; /* Garante altura fixa para o número não "pular" */
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,8 +71,6 @@
   font-weight: 600;
   color: #2c3e50;
 }
-
-/* Estilos para a fila visual */
 .visual-queue {
   display: flex;
   align-items: center;
@@ -100,7 +96,6 @@
   margin-top: 4px;
 }
 
-/* Estilos para a tela de celebração */
 .celebration-background {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
