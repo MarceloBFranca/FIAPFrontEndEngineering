@@ -26,7 +26,7 @@ export const RestaurantList = () => {
       <Row xs={1} md={2} lg={3} className="g-4 mt-4">
         {restaurants.map(restaurant => {
           const queueInfo = queues.find(q => q.IdRestaurant === restaurant.Id);
-          const occupation = queueInfo ? queueInfo.ActualOccupation : 0;
+          const occupation = queueInfo ? queueInfo.ActualOccupation - queueInfo.ActualPosition : 0;
           const hasQueue = occupation > 0;
 
           return (

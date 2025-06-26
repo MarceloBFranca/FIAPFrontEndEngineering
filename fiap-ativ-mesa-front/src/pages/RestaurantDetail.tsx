@@ -31,7 +31,7 @@ export const RestaurantDetail = () => {
     setIsJoining(true);
     setError(null);
 
-    const mockUserId = Math.random() * 2000; 
+    const mockUserId = Math.floor(Math.random() * 2000); 
 
     try {
       const response = await fetch('http://localhost:3000/api/joinQueue', {
@@ -63,6 +63,7 @@ export const RestaurantDetail = () => {
       setIsJoining(false);
     }
   };
+  
   
   return (
     <div className="detail-page-background">
