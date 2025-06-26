@@ -1,26 +1,40 @@
+/* Importando uma fonte para dar um toque mais moderno */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 body {
   font-family: 'Poppins', sans-serif;
-  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 100%);
-  min-height: 100vh;
+  background-color: #f4f7f6; /* Fundo novo, um cinza bem claro, quase branco */
+  margin: 0;
 }
 
-.page-header {
-  text-align: center;
-  padding: 40px 20px;
+/* Container principal que engloba a página toda */
+.main-container {
+  width: 100%;
 }
 
-.page-header h1 {
+/* O novo cabeçalho com gradiente */
+.page-header-redesigned {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 60px 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-bottom: -2rem; /* Faz o conteúdo de baixo sobrepor um pouco */
+}
+
+.page-header-redesigned h1 {
   font-weight: 700;
-  color: #2c3e50;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.page-header p {
+.page-header-redesigned p {
   font-size: 1.1rem;
-  color: #556677;
   max-width: 500px;
   margin: 8px auto 0;
+  opacity: 0.9;
 }
 
+/* ===== ESTILO DOS CARDS (Mantido como você gosta) ===== */
 .restaurant-card {
   border: none;
   border-radius: 12px; 

@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { QueueProvider } from './context/QueueContext';
-import { RestaurantList } from './pages/RestaurantList';
-import { RestaurantDetail } from './pages/RestaurantDetail';
-import { QueuePosition } from './pages/QueuePosition';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { QueueProvider } from './context/QueueContext';
+import { QueuePosition } from './pages/QueuePosition';
+import { RestaurantDetail } from './pages/RestaurantDetail';
+import { RestaurantList } from './pages/RestaurantList';
 
 function App() {
   return (
