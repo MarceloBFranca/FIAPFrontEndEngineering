@@ -1,7 +1,7 @@
 import { Badge, Card, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useQueue } from '../context/QueueContext';
-import './RestaurantList.css'; // Importando o CSS atualizado
+import './RestaurantList.css'; 
 
 export const RestaurantList = () => {
   const { restaurants, queues, loading } = useQueue();
@@ -18,7 +18,7 @@ export const RestaurantList = () => {
   }
 
   return (
-    // O container principal agora tem a classe "main-container" para o novo layout
+    
     <div className="main-container">
       <header className="page-header-redesigned text-center">
         <Container>
@@ -36,8 +36,7 @@ export const RestaurantList = () => {
 
             return (
               <Col key={restaurant.Id}>
-                <Link to={`/restaurant/${restaurant.Id}`} className="card-link text-decoration-none">
-                  {/* Os cards permanecem com o mesmo estilo que você já gosta */}
+                <Link to={`/restaurant/${restaurant.Id}`} className="card-link text-decoration-none">                  
                   <Card className="h-100 restaurant-card">
                     <Card.Img variant="top" src={restaurant.logoUrl} />
                     <Card.Body>

@@ -3,7 +3,6 @@ import { useQueue } from '../context/QueueContext';
 import type { UserQueueInfo, Restaurant, Queue } from '../types';
 import { Container, Spinner, Button, Alert } from 'react-bootstrap';
 import { AnimatePresence, motion } from 'framer-motion';
-import { IoMdPerson } from 'react-icons/io';
 import Confetti from 'react-confetti';
 import useWindowSize from '../hooks/useWindowSize';
 import { useNavigate } from 'react-router-dom';
@@ -12,13 +11,11 @@ import './QueuePosition.css';
 export const QueuePosition = (): JSX.Element => {
   const { restaurants, queues, userQueues, loading } = useQueue();
   const [userInfo, setUserInfo] = useState<UserQueueInfo | null>(null);
-  // Corrigido: Agora usamos setRestaurant para atualizar o restaurante
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const [myCurrentPosition, setMyCurrentPosition] = useState<number | null>(null);
   const [myQueueData, setMyQueueData] = useState<Queue | null>(null);
   const { width, height } = useWindowSize();
-  const [error, setError] = useState<string | null>(null);
-  // Hook useNavigate chamado no nível superior do componente
+  const [error, setError] = useState<string | null>(null);  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +33,7 @@ export const QueuePosition = (): JSX.Element => {
         setMyQueueData(queueData || null);
 
         if (queueData) {
-          // Lógica para encontrar e definir o restaurante
+          
           const restaurantData = restaurants.find(r => r.Id === queueData.IdRestaurant);
           setRestaurant(restaurantData || null);
 
@@ -53,14 +50,14 @@ export const QueuePosition = (): JSX.Element => {
     }
   }, [userInfo, userQueues, restaurants, queues]);
 
-  // Corrigido: handleLeaveQueue definida como uma função async dentro do componente
+  
   const handleLeaveQueue = async () => {
-    // Usamos as variáveis de estado e hooks do escopo do componente
+    
     if (!userInfo) {
       setError('Informações do usuário não encontradas.');
       return;
     }
-    setError(null); // Limpa erros anteriores
+    setError(null); 
 
     try {
       const response = await fetch('http://localhost:3000/api/leaveQueue', {
@@ -76,7 +73,7 @@ export const QueuePosition = (): JSX.Element => {
         return;
       }
 
-      // Limpeza do localStorage e navegação após sucesso
+      
       localStorage.removeItem('userQueueInfo');
       navigate(`/`);
 
@@ -150,7 +147,7 @@ export const QueuePosition = (): JSX.Element => {
             </div>
             <div>
               <span>Sua Senha</span>
-              {/* Utilizando userInfo do estado para garantir consistência */}
+            
               <strong>{userQueues.find(u => u.UserId === userInfo.UserId)?.Position || '-'}</strong>
             </div>
             <div>
@@ -161,10 +158,10 @@ export const QueuePosition = (): JSX.Element => {
         </div>
 
         <div className="visual-queue">
-          {/* Lógica de visualização da fila */}
+        
         </div>
         
-        {/* Corrigido: Texto do botão sem aspas e onClick aponta para a função correta */}
+       
         <Button
           variant="danger"
           className="mt-4"
