@@ -47,7 +47,7 @@ export const QueueProvider = ({ children }: { children: ReactNode }) => {
     const fetchData = async () => {
       try {
         const [resRestaurants, resQueues, resUserQueues] = await Promise.all([
-          fetch('http://localhost:3000/api/restaurants'),
+          fetch('http://localhost:5147/api/restaurants'),
           fetch('http://localhost:3000/api/queue'),
           fetch('http://localhost:3000/api/userQueue')
         ]);

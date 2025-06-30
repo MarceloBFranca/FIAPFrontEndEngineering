@@ -30,17 +30,17 @@ export const RestaurantList = () => {
       <Container className="py-5">
         <Row xs={1} md={2} lg={3} className="g-4 mt-4">
           {restaurants.map(restaurant => {
-            const queueInfo = queues.find(q => q.IdRestaurant === restaurant.Id);
+            const queueInfo = queues.find(q => q.IdRestaurant === restaurant.id);
             const occupation = queueInfo ? queueInfo.ActualOccupation - queueInfo.ActualPosition : 0;
             const hasQueue = occupation > 0;
 
             return (
-              <Col key={restaurant.Id}>
-                <Link to={`/restaurant/${restaurant.Id}`} className="card-link text-decoration-none">                  
+              <Col key={restaurant.id}>
+                <Link to={`/restaurant/${restaurant.id}`} className="card-link text-decoration-none">                  
                   <Card className="h-100 restaurant-card">
                     <Card.Img variant="top" src={restaurant.logoUrl} />
                     <Card.Body>
-                      <Card.Title>{restaurant.Name}</Card.Title>
+                      <Card.Title>{restaurant.name}</Card.Title>
                       <div className="d-flex justify-content-between align-items-center mt-3">
                         <Card.Text className="mb-0">
                           Pessoas na fila: <strong>{occupation}</strong>

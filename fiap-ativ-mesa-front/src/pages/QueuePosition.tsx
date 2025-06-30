@@ -34,7 +34,7 @@ export const QueuePosition = (): JSX.Element => {
 
         if (queueData) {
           
-          const restaurantData = restaurants.find(r => r.Id === queueData.IdRestaurant);
+          const restaurantData = restaurants.find(r => r.id === queueData.IdRestaurant);
           setRestaurant(restaurantData || null);
 
           const currentPosition = myQueueEntry.Position - queueData.ActualPosition;
@@ -99,7 +99,7 @@ export const QueuePosition = (): JSX.Element => {
         <Confetti width={width} height={height} recycle={false} />
         <div className="celebration-content">
           <h1>É a sua vez!</h1>
-          <p>Por favor, dirija-se ao restaurante <strong>{restaurant?.Name}</strong>.</p>
+          <p>Por favor, dirija-se ao restaurante <strong>{restaurant?.name}</strong>.</p>
         </div>
       </div>
     );
@@ -123,7 +123,7 @@ export const QueuePosition = (): JSX.Element => {
       <Container>
         <div className="status-card">
           <p className="card-subtitle">Sua posição na fila para</p>
-          <h2 className="card-restaurant-title">{restaurant?.Name || 'Carregando...'}</h2>
+          <h2 className="card-restaurant-title">{restaurant?.name || 'Carregando...'}</h2>
           
           <div className="position-display">
             <AnimatePresence mode="wait">

@@ -13,7 +13,7 @@ export const RestaurantDetail = () => {
   const [isJoining, setIsJoining] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const restaurant = restaurants.find(r => r.Id === Number(id));
+  const restaurant = restaurants.find(r => r.id === Number(id));
   const queueInfo = queues.find(q => q.IdRestaurant === Number(id));
   const occupation = queueInfo ? queueInfo.ActualOccupation : 0;
 
@@ -74,7 +74,7 @@ export const RestaurantDetail = () => {
           </Col>
 
           <Col md={6} className="mt-4 mt-md-0">
-            <h1 className="restaurant-title">{restaurant.Name}</h1>
+            <h1 className="restaurant-title">{restaurant.name}</h1>
             <p className="restaurant-address">{restaurant.address}</p>
             <p className="restaurant-description">{restaurant.description}</p>
             
