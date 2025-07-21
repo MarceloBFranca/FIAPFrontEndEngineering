@@ -20,3 +20,10 @@ export interface UserQueueInfo {
   Position: number;
   QueueId: number;
 }
+
+export interface Summary {
+  restaurantId: number;  
+  restaurantName: string;
+  restaurantLogo: string;
+  currentOccupation: number;
+}

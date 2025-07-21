@@ -14,7 +14,9 @@ export const RestaurantDetail = () => {
   const [error, setError] = useState<string | null>(null);
 
   const restaurant = restaurants.find(r => r.id === Number(id));
+
   const queueInfo = queues.find(q => q.IdRestaurant === Number(id));
+
   const occupation = queueInfo ? queueInfo.ActualOccupation : 0;
 
   if (loading) {
